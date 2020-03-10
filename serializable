@@ -1,0 +1,71 @@
+package myio;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+
+class Student implements  Serializable
+{
+	private int studentId;
+	private String studentName;
+	public int getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(int stuentId) {
+		this.studentId = stuentId;
+	}
+	public String getStudentName() {
+		return studentName;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	
+}
+//serialization example
+public class Saveobjects {
+
+	public static void main(String[] args) throws IOException {
+	//create Student object
+		Student s1=new Student();
+  //create input stream reader object
+  BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+  
+  //prompt the user for student id
+  System.out.println("Enter student id:");
+  //accept the  data from keyboard to set value to the student id
+  s1.setStudentId(Integer.parseInt(br.readLine()));
+  //prompt the user for student name
+  System.out.println("Enter student name:");
+  s1.setStudentName(br.readLine());
+  
+  //serialize s1
+  saveStudent(s1);
+	}
+	public static void saveStudent(Student s) throws IOException
+	{
+		//create File object
+		File file=new File("C:\\Users\\TSSVJW-training1\\Desktop\\students.dat");
+		
+		//
+		
+		
+		//create File output stream type object
+		FileOutputStream fos=new FileOutputStream(file);
+		
+		//create object output stream object
+		ObjectOutputStream oos=new ObjectOutputStream(fos);
+		
+		//write object into the file
+		oos.writeObject(s);
+		
+		System.out.println("Student object saved to student.dat file successfully");
+	}
+
+}
